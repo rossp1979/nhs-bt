@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% from 'back-link/macro.njk' import backLink %}
+{% from 'button/macro.njk' import button %}
+{% from 'radios/macro.njk' import radios %}
+
+{% set mainClasses = "nhsuk-main-wrapper--s" %}
+
+{% block beforeContent %}
+  {{ backLink({
+    href: "#",
+    text: "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+      <form action="/magical-powers-answer" method="post" novalidate>
+
+            {% from 'fieldset/macro.njk' import fieldset %}
+            {% from 'hint/macro.njk' import hint %}
+
+            {{ radios({
+            idPrefix: "hasSymptoms",
+            name: "hasSymptoms",
+            fieldset: {
+                legend: {
+                text: "Have you felt symptoms of magical powers in the last 30 days?",
+                classes: "nhsuk-fieldset__legend--l",
+                isPageHeading: true
+                }
+            },
+            hint: {
+                text: "For example, things moving when you have strong feelings or hearing someone's thoughts"
+            },
+            value: data.hasSymptoms,
+            items: [
+            {
+                value: "Yes",
+                text: "Yes"
+            },
+            {
+                value: "No",
+                text: "No"
+            },
+            {
+                value: "Not sure",
+                text: "I'm not sure"
+            }
+            ]
+        }) }}  
+
+        {{ button({
+          text: "Continue"
+        }) }}
+
+      </form>
+    </div>
+  </div>
+{% endblock %}

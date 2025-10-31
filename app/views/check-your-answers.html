@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% from 'button/macro.njk' import button %}
+{% from 'summary-list/macro.njk' import summaryList %}
+
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1 class="nhsuk-heading-l">Check your answers before sending your application</h1>
+
+      <h2 class="nhsuk-heading-m">
+        Personal details
+      </h2>
+
+      {{ summaryList({
+        rows: [
+          {
+            key: {
+              text: "Symptoms of magical powers"
+            },
+            value: {
+              text: data.hasSymptoms
+            },
+            actions: {
+              items: [
+                {
+                  href: "/magical-powers",
+                  text: "Change",
+                  visuallyHiddenText: "symptoms of magical powers"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Details of the symptoms"
+            },
+            value: {
+              text: data.details
+            },
+            actions: {
+              items: [
+                {
+                  href: "/details",
+                  text: "Change",
+                  visuallyHiddenText: "details of the symptoms"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+     
+
+      <h2 class="nhsuk-heading-m">
+        Now send your application
+      </h2>
+
+      <p>
+           By submitting this application you are confirming that,
+      to the best of your knowledge, the details you are providing
+      are correct.
+      </p>
+
+      <p>
+      Your details will be sent to Rose Medical Practice to begin
+      your registration.
+    </p>
+
+      <form action="/confirmation-page" method="post" novalidate>
+        {{ button({
+          text: "Confirm and send"
+        }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
